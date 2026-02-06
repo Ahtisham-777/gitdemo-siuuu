@@ -1,0 +1,437 @@
+:root {
+    --burgundy: #460003;
+    --camel: #ffd9c4;
+    --cream: #ecc7ae;
+    --white: #fffcf6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--white); }
+
+/* --- CSS REPLACE START --- */
+.header-top { 
+    background: var(--white); 
+    border-bottom: 2px solid var(--camel); 
+    height: 125px; 
+    position: relative;
+    z-index: 2000;
+    width: 100%;
+}
+
+.scroller-wrapper { 
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+    width: 100%;
+    height: 100%;
+}
+
+.top-scroller { 
+    width: 100%; 
+    overflow: hidden; 
+}
+
+/* Ye purani class naye flexbox logic ke sath */
+.scroll-track { 
+    display: flex; 
+    width: max-content; 
+    animation: scrollAnim 60s linear infinite; 
+    align-items: center;
+}
+
+.scroll-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    min-width: 120px; 
+    margin: 0 10px; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bounce effect */
+    cursor: pointer;
+}
+
+.scroll-item img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--camel);
+    margin-bottom: 5px;
+    transition: all 0.3s ease; /* Image ki border ke liye */
+}
+
+.scroll-item:hover { 
+    transform: scale(1.1) translateZ(-5px); /* Item thora bada aur upar hoga */
+    cursor: pointer;
+}
+
+.top-scroller:hover .scroll-track {
+    animation-play-state: paused !important;
+}
+
+.scroll-item:hover img {
+    border-color: var(--burgundy); /* Border color change */
+    box-shadow: 0 8px 15px rgba(70, 0, 3, 0.2); /* Luxury shadow */
+}
+
+.scroll-item:hover span {
+    color: var(--burgundy); /* Text color change */
+    font-weight: bold;
+}
+
+@keyframes scrollAnim { 
+    0% { transform: translateX(0); } 
+    100% { transform: translateX(-50%); } 
+}
+
+.scroll-btn {
+    position: absolute;
+    z-index: 2100;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--burgundy);
+    color: var(--camel);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* --- Naya Code niche hai --- */
+    transition: all 0.3s ease; /* Ye animation ko smooth banayega */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Jab mouse button par jaye (Ubharne wala effect) */
+.scroll-btn:hover {
+    transform: translateY(-50%) scale(1.2); /* Scale se button bada hoga */
+    background: var(--burgundy); /* Background golden/camel ho jayega */
+    color: var(--camel); /* Icon dark ho jayega */
+    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.4); /* Shadow se ubharne ka effect aayega */
+}
+
+.left-btn { left: 10px; }
+.right-btn { right: 10px; }
+/* --- CSS REPLACE END --- */
+/* Navbar Setup */
+#mainNav {
+    background-color: var(--burgundy);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1500;
+    padding: 15px 0;
+    transition: background-color 0.4s ease;
+}
+
+.nav-transparent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+
+.logo { 
+    color: var(--white) !important; 
+    font-size: 30px; 
+    font-weight: 700; 
+    font-family: 'Playfair Display', serif; 
+    letter-spacing: 1.5px;
+}
+
+/* Navbar ko relative rakhein taake dot iske andar move kare */
+.navbar-nav {
+    position: relative;
+    padding-bottom: 10px;
+    position: relative; /* Ye lazmi hai taake dot iske hisab se move kare */
+    display: flex; 
+}
+
+
+/* Choti Ball (Dot) ki shakal */
+.nav-dot {
+    position: absolute;
+    bottom: 0;
+    left: 0; /* JS isay move karega */
+    width: 8px;
+    height: 8px;
+    background-color: var(--camel);
+    border-radius: 50%; /* Is se wo round ball banegi */
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Magnetic effect */
+    pointer-events: none; /* Ball mouse ke beech mein na aaye */
+    opacity: 0; /* Shuru mein chupi hogi */
+}
+
+/* Jab nav links dikh rahe hon tab dot nazar aaye */
+.navbar-nav:hover .nav-dot, .nav-dot.active {
+    opacity: 1;
+}
+
+
+/* Dropdown ka Background change karne ke liye */
+.dropdown-menu {
+    background-color: var(--burgundy) !important; /* White se Burgundy kar diya */
+    border: 1px solid var(--camel) !important;   /* Camel border luxury look ke liye */
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+/* Dropdown ke andar ke Text (Links) ka color */
+.dropdown-item {
+    color: var(--white) !important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+/* Jab mouse link par jaye (Hover) */
+.dropdown-item:hover {
+    background-color: var(--camel) !important; /* Hover par Camel background */
+    color: var(--burgundy) !important;         /* Text Burgundy ho jaye */
+    padding-left: 20px;                         /* Thora sa move hone wala effect */
+}
+
+/* --- HERO SECTION (Length Barha Di) --- */
+.hero {
+    height: 150vh; /* 100vh se barha kar 150vh kar diya taake image lambi ho jaye */
+    margin-top: -110px; 
+    padding-top: 110px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url(image/hero.jpg\ \(1\).png); /* Aapki local image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Taake scroll karte waqt image peeche rahay */
+}
+.display-1.fw-bold {
+    color: rgba(193, 163, 147, 0.9); /* Using rgba for opacity */
+    opacity: 80%;
+    font-size: 80px;
+    text-align: center;
+    margin-top: 10vh; /* Center karne ke liye */
+    font-family: 'Playfair Display', serif;
+}
+
+p.lead.fst-italic {
+    font-size: 20px;
+    margin-top: 20px;
+    color: var(--cream);
+    font-style: italic;
+    font-weight: bold;
+    font-family: Great Vibes, cursive;
+}
+
+.about-img-wrapper img {
+    transition: transform 0.5s ease;
+    border: 5px solid var(--camel);
+}
+
+.about-img-wrapper:hover img {
+    transform: scale(1.03); /* Halka sa zoom */
+}
+
+.letter-spacing-2 {
+    letter-spacing: 2px;
+}
+
+
+
+.dish-card {
+    background: var(--white);
+    border: 1px solid var(--camel);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.dish-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.dish-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* Mouse lane par image zoom hogi */
+.dish-card:hover .dish-img-container img {
+    transform: scale(1.1);
+}
+
+/* Floating Price Tag */
+.dish-price {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--burgundy);
+    color: var(--camel);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dish-info h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--burgundy);
+    margin-bottom: 10px;
+}
+
+.dish-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(70, 0, 3, 0.15);
+    border-color: var(--burgundy);
+}
+
+
+
+/* Input focus color fix */
+.reservation-form input:focus, .reservation-form select:focus {
+    background: transparent;
+    color: white;
+    border-color: var(--camel) !important;
+    box-shadow: none;
+}
+
+.footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--camel) !important;
+    transform: translateY(-3px);
+    display: inline-block;
+}
+
+
+
+
+/* foooter css */
+
+
+.main-footer {
+    background-color: var(--white);
+    color: var(--burgundy);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--burgundy);
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.footer-logo span {
+    color: var(--burgundy);
+    font-weight: 300;
+}
+
+.footer-heading {
+    color: var(--burgundy);
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--burgundy);
+}
+
+.footer-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(70, 26, 0, 0.7);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(65, 29, 0, 0.7);
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: var(--burgundy);
+    padding-left: 8px;
+}
+
+/* Social Icons Style */
+.social-links a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: rgba(255,255,255,0.1);
+    color: var(--burgundy);
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: 0.4s;
+}
+
+.social-links a:hover {
+    background: var(--burgundy);
+    color: var(--white);
+    transform: translateY(-5px);
+}
+
+/* Newsletter Box */
+.newsletter-box {
+    display: flex;
+    border-bottom: 1px solid var(--burgundy);
+    padding-bottom: 5px;
+}
+
+.newsletter-box input {
+    background: transparent;
+    border: none;
+    color: var(--burgundy);
+    width: 100%;
+    outline: none;
+}
+
+.newsletter-box button {
+    background: transparent;
+    border: none;
+    color: var(--burgundy);
+    cursor: pointer;
+}
+
+.footer-divider {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 40px 0 20px 0;
+}
+
+.footer-bottom {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+}
